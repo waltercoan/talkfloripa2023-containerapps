@@ -1,27 +1,7 @@
 version: '3'
 services:
-  db:
-    container_name: talkfloripaserver
-    image: mariadb:10.3.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'talkfloripadb'
-      MYSQL_USER: 'admin'
-      MYSQL_PASSWORD: 'root'
-      MYSQL_ROOT_PASSWORD: 'root'
   webtalkfloripa:
     image: waltercoan/contapptalkfloripa23:latest
-    build: .
     restart: on-failure
-    depends_on:
-      - "db"
     ports:
       - "8080:8080"
-    links:
-      - db
-    environment:
-      DB_HOST: 'talkfloripaserver:3306'
-      DB_USER: 'root'
-      DB_PASSWORD: 'root'
-      DB_NAME: 'talkfloripadb'
-      SPRING_PROFILES_ACTIVE: 'prod'
