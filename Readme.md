@@ -17,9 +17,19 @@ docker-compose up -d
 
 ## Deploy de aplicações com Container Apps
 
-### Direto do repositório do Github
+### Direto do Dockerfile
 ```
-az containerapp up -n contapp-talkfloripa-github --resource-group rg-talkfloripa2023-brazilsouth-002 --repo https://github.com/waltercoan/talkfloripa2023-containerapps
+az containerapp up -n contapp-talkfloripa-github-001 --resource-group rg-talkfloripa2023-brazilsouth-002 --source .
+```
+
+### Utilizando arquivo Docker Componse
+```
+az containerapp compose create -g rg-talkfloripa2023-brazilsouth-002 --environment contapp-talkfloripa-github-001-env --compose-file-path docker-compose.yaml
+```
+
+### Direto do repositório do Github e Github Actions
+```
+az containerapp up -n contapp-talkfloripa-github --environment contapp-talkfloripa-github-001-env --resource-group rg-talkfloripa2023-brazilsouth-002 --repo https://github.com/waltercoan/talkfloripa2023-containerapps
 ```
 
 ### Configuração escalabilidade com o Keda 
@@ -30,7 +40,3 @@ az containerapp up -n contapp-talkfloripa-github --resource-group rg-talkfloripa
 ab -n 200 https://<containerapp>.azurecontainerapps.io/api/v1/users
 ```
 
-### Utilizando arquivo Docker Componse
-```
-az containerapp compose create -g rg-talkfloripa2023-brazilsouth-002 --environment contapp-talkfloripa-github-env --compose-file-path docker-compose.yaml
-```
