@@ -10,7 +10,8 @@ services:
       MYSQL_PASSWORD: 'root'
       MYSQL_ROOT_PASSWORD: 'root'
   webtalkfloripa:
-    image: contapp:latest
+    image: waltercoan/contapptalkfloripa23:latest
+    build: .
     restart: on-failure
     depends_on:
       - "db"
